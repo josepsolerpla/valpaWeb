@@ -1,6 +1,6 @@
-$headerSize: 150px;
+$headerSize: 100vh;
 $footerSize: 100px;
-$contentSize: calc(100vh -#{$headerSize} - #{$footerSize});
+$contentSize: 100vh;
 
 // Propiedades de los elementos de la app
 
@@ -8,4 +8,12 @@ a {
 }
 
 button {
+}
+
+.logoValpa {
+	&.white {
+		path {
+			fill: white !important;
+		}
+	}
 }

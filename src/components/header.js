@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { HashRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import ReactSVG from 'react-svg';
 
 let lastScrollY = 0;
 let ticking = false;
@@ -105,6 +106,7 @@ class Header extends React.Component {
 							<h3>Temas</h3>
 						</Link>
 					</section>
+					<ReactSVG className="logoValpa white" src="/imagenes/logoValparaiso.svg" />
 				</header>
 			</HashRouter>
 		);
