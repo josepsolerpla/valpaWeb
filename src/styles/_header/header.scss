@@ -7,32 +7,85 @@ header {
 	grid-template-rows: 1fr .2fr;
 	transition: transform 300ms ease-in-out;
 	.buttonNav {
-		@include openMenu;
-		transform: translate(240px, 10px);
+		@include closeMenu;
+		right: 20px;
+		top: 10px;
+		&:active {
+			animation: pop 1s ease-in-out;
+		}
 	}
 	.navBarLinks {
 		display: grid;
 		align-content: center;
-		grid-gap: 25px;
-		.link {
-			padding: 25px 0 25px 5px;
+		grid-gap: 15px;
+		.link,
+		.LoginMenu {
+			padding: 5px 0 5px 5px;
 			background: lighten($color: $mainColor, $amount: 15);
 			color: white;
+		}
+		.link {
 			&.active {
 				background: $secondaryColor;
+			}
+			&:active {
+				animation: pop .5s ease-in-out;
+			}
+		}
+		.LoginMenu {
+			div {
+				cursor: pointer;
+			}
+			form {
+				position: absolute;
+				left: 0;
+				margin-top: 15px;
+				padding: 15px;
+				border: lighten($color: $secondaryColor, $amount: 25%) 1px solid;
+				border-radius: 5px;
+				background: $mainColor;
+				transition: 100ms ease-in-out;
+				transition-timing-function: opacity transform;
+				label {
+					display: grid;
+					input {
+						background: transparent;
+						border: none;
+						padding: 3px 2px;
+						color: white;
+						border-bottom: lighten($color: $secondaryColor, $amount: 25%) 1px solid;
+					}
+				}
+				.buttons {
+					margin-top: 25px;
+				}
+				&.close {
+					transform: translate(-100%, 0);
+				}
 			}
 		}
 	}
 	.logoValpa {
+		height: initial;
 		transition: all 300ms ease-in-out;
 	}
-	&.fixed {
+	&.open {
 		transform: translate3d(-200px, 0, 0);
 		.buttonNav {
-			@include closeMenu;
+			@include openMenu;
 		}
 		.logoValpa {
+			padding: 0 25px;
 			transform: translate3d(100px, 0, 0) scale(.35);
+		}
+	}
+
+	@media screen and (max-width: 780px) {
+		width: 300px;
+		.navBarLinks {
+			.LoginMenu form {
+				right: 0;
+			}
 		}
 	}
 }

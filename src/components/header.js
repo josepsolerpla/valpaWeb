@@ -5,6 +5,8 @@ import { HashRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ReactSVG from 'react-svg';
 
+import LoginMenu from './shared/LoginMenu';
+
 let lastScrollY = 0;
 let ticking = false;
 
@@ -21,9 +23,11 @@ class Header extends React.Component {
 		super(props);
 		// Estado
 		this.state = {
-			hideShow: ''
+			hideShow: 'open',
+			modalLogin: false
 		};
 		this.handleScroll = this.handleScroll.bind(this);
+		this.showModalLogin = this.showModalLogin.bind(this);
 	}
 	// Esta funcion se acciona cuando el componente se monta
 	componentDidMount() {
@@ -40,11 +44,11 @@ class Header extends React.Component {
 		if (!ticking && width > 780) {
 			window.requestAnimationFrame(() => {
 				if (lastScrollY <= 200) {
-					document.getElementById('main').classList.add('fixed');
+					document.getElementById('main').classList.add('open');
 					this.setState({ hideShow: '' });
 				} else {
-					document.getElementById('main').classList.remove('fixed');
-					this.setState({ hideShow: 'fixed' });
+					document.getElementById('main').classList.remove('open');
+					this.setState({ hideShow: 'open' });
 				}
 
 				ticking = false;
@@ -53,25 +57,67 @@ class Header extends React.Component {
 			ticking = true;
 		}
 	}
-	// Funcion para cambiar el estado del estado 'hideShow',
-	// des esta forma veremos o no el menu
-	cambiarEstado() {
-		if (this.state.hideShow == 'fixed') {
+	closeModal() {
+		if (this.state.hideShow == 'open') {
 			this.setState({ hideShow: '' });
-			// document.querySelector('body').classList.add('blockScroll');
 		} else {
-			this.setState({ hideShow: 'fixed' });
-			// document.querySelector('body').classList.remove('blockScroll');
+			this.setState({ hideShow: 'open', modalLogin: false });
+		}
+	}
+	showModalLogin() {
+		if (!this.state.hideShow) {
+			this.setState({
+				modalLogin: !this.state.modalLogin
+			});
 		}
 	}
 	// Render
 	render() {
-		const { hideShow } = this.state;
+		const { isAuth } = this.props;
+		const { hideShow, modalLogin } = this.state;
 		const history = this.context.router.history;
+		if (!isAuth) {
+			return (
+				<HashRouter>
+					<header className={hideShow}>
+						<section className={`buttonNav`} onClick={() => this.closeModal()}>
+							<div className="line" />
+							<div className="line" />
+							<div className="line" />
+						</section>
+						<section className={`navBarLinks`}>
+							<Link
+								to="/"
+								className={'link ' + `${history.location.hash == '#/' ? 'active' : null}`}
+								onClick={() => (hideShow != '' ? this.closeModal() : null)}
+							>
+								Inicio
+							</Link>
+							<Link
+								to="/Calendario"
+								className={'link ' + `${history.location.hash == '#/Calendario' ? 'active' : null}`}
+								onClick={() => (hideShow != '' ? this.closeModal() : null)}
+							>
+								Calendario
+							</Link>
+							<Link
+								to="/RSS"
+								className={'link ' + `${history.location.hash == '#/RSS' ? 'active' : null}`}
+								onClick={() => (hideShow != '' ? this.closeModal() : null)}
+							>
+								RSS
+							</Link>
+							<LoginMenu modalLogin={modalLogin} showModalLogin={this.showModalLogin} />
+						</section>
+						<ReactSVG className="logoValpa white" src="/imagenes/logoValparaiso.svg" />
+					</header>
+				</HashRouter>
+			);
+		}
 		return (
 			<HashRouter>
 				<header className={hideShow}>
-					<section className={`buttonNav`} onClick={() => this.cambiarEstado()}>
+					<section className={`buttonNav`} onClick={() => this.closeModal()}>
 						<div className="line" />
 						<div className="line" />
 						<div className="line" />
@@ -80,30 +126,30 @@ class Header extends React.Component {
 						<Link
 							to="/"
 							className={'link ' + `${history.location.hash == '#/' ? 'active' : null}`}
-							onClick={() => (hideShow != '' ? this.cambiarEstado() : null)}
+							onClick={() => (hideShow != '' ? this.closeModal() : null)}
 						>
-							<h3>Inicio</h3>
+							Inicio
 						</Link>
 						<Link
 							to="/Calendario"
 							className={'link ' + `${history.location.hash == '#/Calendario' ? 'active' : null}`}
-							onClick={() => (hideShow != '' ? this.cambiarEstado() : null)}
+							onClick={() => (hideShow != '' ? this.closeModal() : null)}
 						>
-							<h3>Calendario</h3>
+							Calendario
 						</Link>
 						<Link
 							to="/RSS"
 							className={'link ' + `${history.location.hash == '#/RSS' ? 'active' : null}`}
-							onClick={() => (hideShow != '' ? this.cambiarEstado() : null)}
+							onClick={() => (hideShow != '' ? this.closeModal() : null)}
 						>
-							<h3>RSS</h3>
+							RSS
 						</Link>
 						<Link
 							to="/Temas"
 							className={'link ' + `${history.location.hash == '#/Temas' ? 'active' : null}`}
-							onClick={() => (hideShow != '' ? this.cambiarEstado() : null)}
+							onClick={() => (hideShow != '' ? this.closeModal() : null)}
 						>
-							<h3>Temas</h3>
+							Temas
 						</Link>
 					</section>
 					<ReactSVG className="logoValpa white" src="/imagenes/logoValparaiso.svg" />
@@ -115,6 +161,9 @@ class Header extends React.Component {
 
 Header.contextTypes = {
 	router: PropTypes.object
+};
+Header.propTypes = {
+	isAuth: PropTypes.any
 };
 
 const mapStateToProps = (state) => ({});

@@ -8,12 +8,22 @@
 		height: 5px;
 		background: white;
 		margin-bottom: 8px;
+		&:nth-child(1) {
+			transform: rotate(0) translate(0, 0);
+		}
+		&:nth-child(2) {
+			opacity: 1;
+		}
+		&:nth-child(3) {
+			transform: rotate(0) translate(0, 0);
+		}
 	}
 }
 @mixin closeMenu {
 	cursor: pointer;
 	position: absolute;
 	.line {
+		transition: all .3s ease-in-out;
 		width: 50px;
 		height: 5px;
 		background: lighten($color: $secondaryColor, $amount: 20%);

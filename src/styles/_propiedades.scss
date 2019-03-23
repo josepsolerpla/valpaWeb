@@ -8,11 +8,21 @@ a {
 }
 
 button {
+	border: none;
+	padding: 10px 5px;
+	border-radius: 5px;
+	margin: 3px;
+	background: lighten($color: $secondaryColor, $amount: 5%);
+	transition: transform 300ms ease-in-out;
+	color: white;
+	&:hover {
+		transform: scale(0.95);
+	}
 }
 
 .logoValpa {
 	&.white {
-		path {
+		* {
 			fill: white !important;
 		}
 	}
