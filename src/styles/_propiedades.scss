@@ -1,0 +1,11 @@
+$headerSize: 150px;
+$footerSize: 100px;
+$contentSize: calc(100vh -#{$headerSize} - #{$footerSize});
+
+// Propiedades de los elementos de la app
+
+a {
+}
+
+button {
+}

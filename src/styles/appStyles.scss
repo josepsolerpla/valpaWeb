@@ -1,0 +1,12 @@
+@import "./colors.scss";
+@import "./animaciones.scss";
+@import "./propiedades.scss";
+@import "./mixins.scss";
+@import "./responsiveBasic.scss";
+@import "./_footer/footer.scss";
+@import "./_header/header.scss";
+@import "./_content/content.scss";
+
+.app {
+	font-family: "Muli";
+}

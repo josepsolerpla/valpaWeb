@@ -1,0 +1,6 @@
+node_modules/
+.vscode/
+coverage/
+doc/
+package-lock.json
+./tests/components/__snapshots__
