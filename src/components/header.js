@@ -69,40 +69,40 @@ class Header extends React.Component {
 		const history = this.context.router.history;
 		return (
 			<HashRouter>
-				<header>
-					<section className={`buttonNav ${hideShow}`} onClick={() => this.cambiarEstado()}>
+				<header className={hideShow}>
+					<section className={`buttonNav`} onClick={() => this.cambiarEstado()}>
 						<div className="line" />
 						<div className="line" />
 						<div className="line" />
 					</section>
-					<section className={`navBarLinks ${hideShow}`}>
+					<section className={`navBarLinks`}>
 						<Link
 							to="/"
-							className={history.location.hash == '#/' ? 'active' : null}
+							className={'link ' + `${history.location.hash == '#/' ? 'active' : null}`}
 							onClick={() => (hideShow != '' ? this.cambiarEstado() : null)}
 						>
-							Inicio
+							<h3>Inicio</h3>
 						</Link>
 						<Link
 							to="/Calendario"
-							className={history.location.hash == '#/Calendario' ? 'active' : null}
+							className={'link ' + `${history.location.hash == '#/Calendario' ? 'active' : null}`}
 							onClick={() => (hideShow != '' ? this.cambiarEstado() : null)}
 						>
-							Calendario
+							<h3>Calendario</h3>
 						</Link>
 						<Link
 							to="/RSS"
-							className={history.location.hash == '#/RSS' ? 'active' : null}
+							className={'link ' + `${history.location.hash == '#/RSS' ? 'active' : null}`}
 							onClick={() => (hideShow != '' ? this.cambiarEstado() : null)}
 						>
-							RSS
+							<h3>RSS</h3>
 						</Link>
 						<Link
 							to="/Temas"
-							className={history.location.hash == '#/Temas' ? 'active' : null}
+							className={'link ' + `${history.location.hash == '#/Temas' ? 'active' : null}`}
 							onClick={() => (hideShow != '' ? this.cambiarEstado() : null)}
 						>
-							Temas
+							<h3>Temas</h3>
 						</Link>
 					</section>
 				</header>

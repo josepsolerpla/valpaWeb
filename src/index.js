@@ -20,6 +20,9 @@ import Header from './components/header';
 import Footer from './components/footer';
 import AppRoutes from './routes';
 
+// Import CSS
+import './styles/appStyles.scss';
+
 document.addEventListener('DOMContentLoaded', function() {
 	ReactDOM.render(
 		<Provider store={store}>

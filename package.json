@@ -45,8 +45,9 @@
 		"react": "^16.8.2",
 		"react-dom": "^16.8.2",
 		"react-test-renderer": "^16.8.2",
+		"sass-loader": "^7.1.0",
 		"style-loader": "^0.23.1",
-		"webpack": "^4.29.3",
+		"webpack": "^4.29.6",
 		"webpack-cli": "^3.1.1",
 		"webpack-dev-middleware": "^3.5.2",
 		"webpack-dev-server": "^3.1.9",
@@ -86,7 +87,6 @@
 		"redux-i18n": "^1.5.15",
 		"redux-testkit": "^1.0.6",
 		"redux-thunk": "^2.3.0",
-		"sass-loader": "^7.1.0",
 		"semantic-ui-react": "^0.84.0",
 		"webpack-merge": "^4.2.1"
 	}

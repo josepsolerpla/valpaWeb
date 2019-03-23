@@ -1,6 +1,31 @@
 header {
 	height: 100vh;
-	width: 20%;
-	max-width: 300px;
+	width: 300px;
 	background: $mainColor;
+	position: fixed;
+	display: grid;
+	transition: transform 300ms ease-in-out;
+	.buttonNav {
+		@include openMenu;
+		transform: translate(240px, 10px);
+	}
+	.navBarLinks {
+		display: grid;
+		align-content: center;
+		grid-gap: 25px;
+		.link {
+			padding: 25px 0 25px 5px;
+			background: lighten($color: $mainColor, $amount: 15);
+			color: white;
+			&.active {
+				background: $secondaryColor;
+			}
+		}
+	}
+	&.fixed {
+		transform: translate3d(-220px, 0, 0);
+		.buttonNav {
+			@include closeMenu;
+		}
+	}
 }
