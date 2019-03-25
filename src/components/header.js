@@ -23,8 +23,10 @@ class Header extends React.Component {
 		super(props);
 		// Estado
 		this.state = {
-			hideShow: 'open',
-			modalLogin: false
+			// hideShow: 'open',
+			hideShow: '',
+			// modalLogin: false
+			modalLogin: true
 		};
 		this.handleScroll = this.handleScroll.bind(this);
 		this.showModalLogin = this.showModalLogin.bind(this);

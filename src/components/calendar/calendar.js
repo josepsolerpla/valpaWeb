@@ -1,20 +1,25 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import ReactSVG from 'react-svg';
 
-class Calendar extends React.Component {
+import CalendarView from './calendarView';
+
+class CalendarComponent extends React.Component {
 	// Render
 	render() {
-		return (
-			<main className="Calendar">
-				<ReactSVG className="logoValpa white" src="/imagenes/logoValparaiso.svg" />
-				<h1 className="comming">Página en construcción</h1>
-			</main>
-		);
+		const { isAuthed } = this.props;
+		if (isAuthed) {
+			return <CalendarView />;
+		}
+		return <section className="Calendar" />;
 	}
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({ ...state.Auth });
 const mapDispatchToProps = (dispatch) => ({});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Calendar);
+CalendarComponent.propTypes = {
+	isAuthed: PropTypes.any
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CalendarComponent);

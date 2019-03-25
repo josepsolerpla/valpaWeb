@@ -70,8 +70,12 @@
 		"html-webpack-plugin": "^3.2.0",
 		"intersection-observer": "^0.5.1",
 		"konva": "^2.6.0",
+		"moment": "^2.24.0",
 		"prop-types": "^15.6.2",
 		"react-beforeunload": "^1.0.4",
+		"react-big-calendar": "^0.20.4",
+		"react-google-calendar-api": "^1.0.10",
+		"react-google-login": "^5.0.2",
 		"react-intersection-observer": "^8.0.1",
 		"react-konva": "^16.8.3",
 		"react-reactive-form": "^1.0.28",
@@ -82,12 +86,15 @@
 		"react-signature-pad-wrapper": "^1.2.3",
 		"react-slideshow-image": "^1.1.2",
 		"react-svg": "^7.2.7",
+		"react_google_calendar": "^2.2.3",
 		"reaptcha": "^1.4.0",
 		"redux": "^4.0.1",
 		"redux-i18n": "^1.5.15",
 		"redux-testkit": "^1.0.6",
 		"redux-thunk": "^2.3.0",
 		"semantic-ui-react": "^0.84.0",
+		"superagent": "^4.1.0",
+		"superagent-promise": "^1.1.0",
 		"webpack-merge": "^4.2.1"
 	}
 }
