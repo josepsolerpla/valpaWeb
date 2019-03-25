@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 import { HashRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ReactSVG from 'react-svg';
+import agent from '../agent';
+
+import { VALIDATE_TOKEN } from '../constants/actionTypes';
 
 import LoginMenu from './shared/LoginMenu';
-
-let lastScrollY = 0;
-let ticking = false;
 
 /**
  * Header
@@ -28,36 +28,8 @@ class Header extends React.Component {
 			// modalLogin: false
 			modalLogin: true
 		};
-		this.handleScroll = this.handleScroll.bind(this);
 		this.showModalLogin = this.showModalLogin.bind(this);
-	}
-	// Esta funcion se acciona cuando el componente se monta
-	componentDidMount() {
-		window.addEventListener('scroll', this.handleScroll);
-	}
-	// Esta funcion se acciona cuando el componente se desmonta
-	componentWillUnmount() {
-		window.removeEventListener('scroll', this.handleScroll);
-	}
-	// Funcion para comprobar el movimiento de la pantalla en Y
-	handleScroll() {
-		lastScrollY = window.scrollY;
-		let width = window.innerWidth;
-		if (!ticking && width > 780) {
-			window.requestAnimationFrame(() => {
-				if (lastScrollY <= 200) {
-					document.getElementById('main').classList.add('open');
-					this.setState({ hideShow: '' });
-				} else {
-					document.getElementById('main').classList.remove('open');
-					this.setState({ hideShow: 'open' });
-				}
-
-				ticking = false;
-			});
-
-			ticking = true;
-		}
+		this.props.isAuthed();
 	}
 	closeModal() {
 		if (this.state.hideShow == 'open') {
@@ -78,6 +50,7 @@ class Header extends React.Component {
 		const { isAuth } = this.props;
 		const { hideShow, modalLogin } = this.state;
 		const history = this.context.router.history;
+		// If the user is Authed
 		if (!isAuth) {
 			return (
 				<HashRouter>
@@ -116,6 +89,7 @@ class Header extends React.Component {
 				</HashRouter>
 			);
 		}
+		// If not
 		return (
 			<HashRouter>
 				<header className={hideShow}>
@@ -153,6 +127,7 @@ class Header extends React.Component {
 						>
 							Temas
 						</Link>
+						<LoginMenu modalLogin={modalLogin} showModalLogin={this.showModalLogin} />
 					</section>
 					<ReactSVG className="logoValpa white" src="/imagenes/logoValparaiso.svg" />
 				</header>
@@ -165,10 +140,15 @@ Header.contextTypes = {
 	router: PropTypes.object
 };
 Header.propTypes = {
-	isAuth: PropTypes.any
+	isAuth: PropTypes.any,
+	isAuthed: PropTypes.func
 };
 
-const mapStateToProps = (state) => ({});
-const mapDispatchToProps = (dispatch) => ({});
+const mapStateToProps = (state) => ({ ...state.Auth });
+const mapDispatchToProps = (dispatch) => ({
+	isAuthed: () => {
+		dispatch({ type: VALIDATE_TOKEN, payload: agent.Auth.isAuthed() });
+	}
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

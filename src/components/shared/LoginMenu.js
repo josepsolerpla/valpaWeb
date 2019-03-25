@@ -36,31 +36,30 @@ class LoginMenu extends Component {
 			})
 			.then(
 				() => {
-					console.log(gapi);
 					// Listen for sign-in state changes.
 					gapi.auth2.getAuthInstance().isSignedIn.listen(this.updateSigninStatus);
 					// Handle the initial sign-in state.
 					this.updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
 				},
 				(error) => {
-					console.log(error);
+					console.warn(error);
 				}
 			);
 	}
 	updateSigninStatus(isSignedIn) {
 		if (isSignedIn) {
 			console.log('Correct');
+			this.props.setAuth(isSignedIn);
 		} else {
 			console.warn('ERROR on google auth');
 		}
-		this.props.setAuth(isSignedIn);
 	}
 	handleAuthClick() {
 		gapi.auth2.getAuthInstance().signIn();
 	}
 	handleSignoutClick() {
 		gapi.auth2.getAuthInstance().signOut();
-		this.props.setAuth(false);
+		this.props.logout();
 	}
 	login(ev) {
 		ev.preventDefault();
@@ -74,9 +73,9 @@ class LoginMenu extends Component {
 		});
 	}
 	render() {
-		const { modalLogin, showModalLogin, isAuthed, errors } = this.props;
+		const { modalLogin, showModalLogin, isAuth, errors } = this.props;
 		const { name, password } = this.state;
-		if (isAuthed) {
+		if (isAuth) {
 			return (
 				<section className="LoginMenu">
 					<div onClick={showModalLogin}>Login</div>
@@ -125,7 +124,7 @@ const mapDispatchToProps = (dispatch) => ({
 		dispatch({ type: LOGIN, payload: agent.Auth.login(name, password) });
 	},
 	logout: () => {
-		dispatch({ type: LOGOUT });
+		dispatch({ type: LOGOUT, payload: agent.Auth.logout() });
 	}
 });
 
@@ -133,8 +132,9 @@ LoginMenu.propTypes = {
 	modalLogin: PropTypes.bool,
 	showModalLogin: PropTypes.func,
 	setAuth: PropTypes.func,
-	isAuthed: PropTypes.any,
+	isAuth: PropTypes.bool,
 	loginRequest: PropTypes.func,
+	logout: PropTypes.func,
 	errors: PropTypes.object
 };
 

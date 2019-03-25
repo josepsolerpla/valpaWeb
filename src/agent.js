@@ -1,5 +1,6 @@
 import superagentPromise from 'superagent-promise';
 import _superagent from 'superagent';
+import { Utils } from './utils';
 
 const superagent = superagentPromise(_superagent, global.Promise);
 
@@ -22,7 +23,15 @@ const requests = {
 };
 
 const Auth = {
-	login: (user, password) => requests.post('/users/login', { user: user, password: password })
+	login: (user, password) => requests.post('/users/login', { user: user, password: password }),
+	logout: () => {
+		Utils.deleteCookie('jwt');
+		token = null;
+	},
+	isAuthed: () => {
+		if (Utils.getCookie('jwt')) return requests.post('/users/resolveToken', { token: Utils.getCookie('jwt') });
+		else return { error: 'no_jwt' };
+	}
 };
 
 export default {

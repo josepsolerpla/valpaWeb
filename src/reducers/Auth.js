@@ -1,34 +1,40 @@
-import { SET_AUTH, LOGIN, LOGOUT } from '../constants/actionTypes';
+import { SET_AUTH, LOGIN, LOGOUT, VALIDATE_TOKEN } from '../constants/actionTypes';
 
 const initialState = {
-	isAuthed: false
+	isAuth: false
 };
 
 export default function Auth(state = initialState, action) {
 	switch (action.type) {
+		case VALIDATE_TOKEN:
+			return {
+				...state,
+				isAuth: action.payload.user ? true : false,
+				user: !action.payload.error ? action.payload.user : null
+			};
 		case SET_AUTH:
 			return {
 				...state,
-				isAuthed: action.auth
+				isAuth: action.error ? false : action.auth
 			};
 		case LOGIN:
 			if (action.error) {
 				return {
 					...state,
 					errors: action.payload.errors,
-					isAuthed: false
+					isAuth: false
 				};
 			}
 			return {
 				...state,
 				user: action.user,
-				isAuthed: true
+				isAuth: true
 			};
 		case LOGOUT:
 			return {
 				...state,
 				user: null,
-				isAuthed: false
+				isAuth: false
 			};
 		default:
 			return state;
