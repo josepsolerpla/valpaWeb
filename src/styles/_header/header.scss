@@ -96,7 +96,20 @@ header {
 	width: fit-content;
 	min-width: 500px;
 	transition: min-width 300ms ease-in-out;
+
+	// Delete this if you are not going to use both headers
+	display: block;
+	background: transparent;
+
+	.buttonNav {
+		@include closeMenu;
+		left: 20px;
+		&:active {
+			animation: pop 1s ease-in-out;
+		}
+	}
 	.menu {
+		transition: transform 300ms ease-in-out;
 		.faders {
 			* {
 				transition: all 300ms ease-in-out;
@@ -111,36 +124,44 @@ header {
 				filter: url(#dropshadowHover);
 			}
 		}
-	}
-	.LoginMenu {
-		div {
-			cursor: pointer;
-		}
-		form {
-			position: relative;
-			left: 300px;
-			top: 75px;
-			label {
-				input {
-					margin: 50px 0;
-				}
+		.LoginMenu {
+			div {
+				cursor: pointer;
 			}
-			.buttons {
+			form {
 				position: relative;
-				left: -300px;
-				top: -190px;
-				display: grid;
-				grid-template-columns: 1fr;
-				width: 50px;
-				button {
-					&:hover {
-						transform: initial !important;
+				left: 300px;
+				top: 75px;
+				label {
+					input {
+						margin: 50px 0;
 					}
 				}
-				&.logout {
-					top: 0;
+				.buttons {
+					position: relative;
+					left: -300px;
+					top: -190px;
+					display: grid;
+					grid-template-columns: 1fr;
+					width: 50px;
+					button {
+						&:hover {
+							transform: initial !important;
+						}
+					}
+					&.logout {
+						top: 0;
+					}
 				}
 			}
+		}
+	}
+	&.close {
+		.buttonNav {
+			@include openMenu;
+		}
+		.menu {
+			transform: translate(-100%, 0);
 		}
 	}
 	@media screen and (max-width: 780px) {

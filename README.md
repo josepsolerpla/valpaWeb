@@ -1,5 +1,6 @@
 ## Proyecto TFG de Josep Soler Pla
 Aplicación Web para Valparaíso
+[Ire actualizando, aqui podras ver por lo menos el frontend](http://yuse.ga/~valpaWeb/#/RSS)
 
 # Primeros diseños de Pagina
 ![alt text](https://yuse.ga/ALL.png)
