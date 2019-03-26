@@ -89,3 +89,57 @@ header {
 		}
 	}
 }
+
+.menu__container {
+	position: fixed;
+	height: 100vh;
+	width: fit-content;
+	min-width: 500px;
+	transition: min-width 300ms ease-in-out;
+	.menu {
+		.faders {
+			* {
+				transition: transform 300ms ease-in-out, fill 300ms ease-in-out;
+			}
+			.active {
+				.Check * {
+					fill: green !important;
+				}
+			}
+		}
+	}
+	.LoginMenu {
+		div {
+			cursor: pointer;
+		}
+		form {
+			position: relative;
+			left: 300px;
+			top: 75px;
+			label {
+				input {
+					background: transparent;
+					border: none;
+					border-bottom: 1px solid $mainColor;
+					margin-bottom: 50px;
+				}
+			}
+			.buttons {
+				position: relative;
+				left: -300px;
+				top: -175px;
+				display: grid;
+				grid-template-columns: 1fr;
+				width: 50px;
+				button {
+					&:hover {
+						transform: initial !important;
+					}
+				}
+			}
+		}
+	}
+	@media screen and (max-width: 780px) {
+		min-width: 320px;
+	}
+}

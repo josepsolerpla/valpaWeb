@@ -8,6 +8,7 @@ a {
 }
 
 button {
+	cursor: pointer;
 	border: none;
 	padding: 10px 5px;
 	border-radius: 5px;
@@ -25,5 +26,15 @@ button {
 		* {
 			fill: white !important;
 		}
+	}
+}
+
+foreignObject {
+	label,
+	input {
+		font-size: 4rem !important;
+	}
+	button {
+		font-size: 4rem !important;
 	}
 }

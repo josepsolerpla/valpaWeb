@@ -17,6 +17,7 @@ import { createBrowserHistory } from 'history';
 import { HashRouter } from 'react-router-dom';
 
 import Header from './components/header';
+import Menu from './components/menu';
 import Footer from './components/footer';
 import AppRoutes from './routes';
 
@@ -28,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		<Provider store={store}>
 			<Router history={createBrowserHistory()}>
 				<I18n translations={translations} initialLang={'es'} fallbackLang={'es'}>
-					<Header />
+					<Menu />
 					<aside id="main" className="">
 						<HashRouter>
 							<AppRoutes />

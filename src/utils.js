@@ -42,6 +42,17 @@ let Utils = {
 		this.setState({
 			[event.target.name]: event.target.value
 		});
+	},
+	/**
+	 * Loop X times
+	 */
+	times: (n) => (f) => {
+		let iter = (i) => {
+			if (i === n) return;
+			f(i);
+			iter(i + 1);
+		};
+		return iter(0);
 	}
 };
 // Usar that para referirse a la propia Utils
