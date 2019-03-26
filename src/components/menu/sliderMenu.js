@@ -46,7 +46,7 @@ class SliderMenu extends React.Component {
 									</text>
 								</g>
 							</g>
-							<g transform="matrix(1 0 0 1.1845 8.5 -111.05)" className="Check">
+							<g transform="matrix(1 0 0 1.1845 8.5 -111.05)" className="Check" filter="url(#dropshadow)">
 								<path
 									d="m1275 576.25c0-14.212-13.67-25.75-30.5-25.75h-133c-16.83 0-30.5 11.538-30.5 25.75v51.5c0 14.212 13.67 25.75 30.5 25.75h133c16.83 0 30.5-11.538 30.5-25.75z"
 									fill="#ffccd7"
@@ -92,7 +92,11 @@ class SliderMenu extends React.Component {
 									</text>
 								</g>
 							</g>
-							<g className="Check" transform="matrix(1,0,0,1.18447,8.5,-111.049)">
+							<g
+								className="Check"
+								filter="url(#dropshadow)"
+								transform="matrix(1,0,0,1.18447,8.5,-111.049)"
+							>
 								<path
 									d="M1275,576.25C1275,562.038 1261.33,550.5 1244.5,550.5L1111.5,550.5C1094.67,550.5 1081,562.038 1081,576.25L1081,627.75C1081,641.962 1094.67,653.5 1111.5,653.5L1244.5,653.5C1261.33,653.5 1275,641.962 1275,627.75L1275,576.25Z"
 									style={{ fill: 'rgb(255,204,215)' }}
@@ -140,7 +144,11 @@ class SliderMenu extends React.Component {
 									</text>
 								</g>
 							</g>
-							<g className="Check" transform="matrix(1,0,0,1.18447,8.5,104.951)">
+							<g
+								className="Check"
+								filter="url(#dropshadow)"
+								transform="matrix(1,0,0,1.18447,8.5,104.951)"
+							>
 								<path
 									d="M1275,576.25C1275,562.038 1261.33,550.5 1244.5,550.5L1111.5,550.5C1094.67,550.5 1081,562.038 1081,576.25L1081,627.75C1081,641.962 1094.67,653.5 1111.5,653.5L1244.5,653.5C1261.33,653.5 1275,641.962 1275,627.75L1275,576.25Z"
 									style={{ fill: 'rgb(255,204,215)' }}
@@ -188,7 +196,11 @@ class SliderMenu extends React.Component {
 									</text>
 								</g>
 							</g>
-							<g className="Check" transform="matrix(1,0,0,1.18447,8.5,322.951)">
+							<g
+								className="Check"
+								filter="url(#dropshadow)"
+								transform="matrix(1,0,0,1.18447,8.5,322.951)"
+							>
 								<path
 									d="M1275,576.25C1275,562.038 1261.33,550.5 1244.5,550.5L1111.5,550.5C1094.67,550.5 1081,562.038 1081,576.25L1081,627.75C1081,641.962 1094.67,653.5 1111.5,653.5L1244.5,653.5C1261.33,653.5 1275,641.962 1275,627.75L1275,576.25Z"
 									style={{ fill: 'rgb(255,204,215)' }}
@@ -237,7 +249,11 @@ class SliderMenu extends React.Component {
 									</text>
 								</g>
 							</g>
-							<g className="Check" transform="matrix(1,0,0,1.18447,8.5,541.951)">
+							<g
+								className="Check"
+								filter="url(#dropshadow)"
+								transform="matrix(1,0,0,1.18447,8.5,541.951)"
+							>
 								<path
 									d="M1275,576.25C1275,562.038 1261.33,550.5 1244.5,550.5L1111.5,550.5C1094.67,550.5 1081,562.038 1081,576.25L1081,627.75C1081,641.962 1094.67,653.5 1111.5,653.5L1244.5,653.5C1261.33,653.5 1275,641.962 1275,627.75L1275,576.25Z"
 									style={{ fill: 'rgb(255,204,215)' }}

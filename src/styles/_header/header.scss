@@ -99,12 +99,16 @@ header {
 	.menu {
 		.faders {
 			* {
-				transition: transform 300ms ease-in-out, fill 300ms ease-in-out;
+				transition: all 300ms ease-in-out;
 			}
 			.active {
 				.Check * {
-					fill: green !important;
+					fill: rgb(31, 185, 31) !important;
+					filter: url(#dropshadowHover);
 				}
+			}
+			.Check:hover {
+				filter: url(#dropshadowHover);
 			}
 		}
 	}
@@ -118,16 +122,13 @@ header {
 			top: 75px;
 			label {
 				input {
-					background: transparent;
-					border: none;
-					border-bottom: 1px solid $mainColor;
-					margin-bottom: 50px;
+					margin: 50px 0;
 				}
 			}
 			.buttons {
 				position: relative;
 				left: -300px;
-				top: -175px;
+				top: -190px;
 				display: grid;
 				grid-template-columns: 1fr;
 				width: 50px;
@@ -135,6 +136,9 @@ header {
 					&:hover {
 						transform: initial !important;
 					}
+				}
+				&.logout {
+					top: 0;
 				}
 			}
 		}

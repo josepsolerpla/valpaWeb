@@ -21,6 +21,14 @@ button {
 	}
 }
 
+input {
+	&.transparent {
+		background: transparent;
+		border: none;
+		border-bottom: 1px solid $mainColor;
+	}
+}
+
 .logoValpa {
 	&.white {
 		* {
@@ -30,11 +38,7 @@ button {
 }
 
 foreignObject {
-	label,
-	input {
-		font-size: 4rem !important;
-	}
-	button {
+	* {
 		font-size: 4rem !important;
 	}
 }

@@ -34,7 +34,7 @@ const SocialLoginGoogle = (props) => {
 	return (
 		<GoogleLogin
 			clientId={googleApi.clientId}
-			buttonText="Login"
+			buttonText="Google"
 			onSuccess={props.response}
 			onFailure={props.response}
 		/>

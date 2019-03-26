@@ -80,7 +80,7 @@ class LoginMenu extends Component {
 				<section className="LoginMenu">
 					<div onClick={showModalLogin}>Login</div>
 					<form className={modalLogin ? null : 'close'}>
-						<label className="buttons">
+						<label className="buttons logout">
 							<button onClick={this.handleSignoutClick}>Logout</button>
 						</label>
 					</form>
@@ -93,11 +93,17 @@ class LoginMenu extends Component {
 				<form className={modalLogin ? null : 'close'} onSubmit={this.login}>
 					<label>
 						User:
-						<input name={'name'} value={name} onChange={this.changeInput} />
+						<input className="transparent" name={'name'} value={name} onChange={this.changeInput} />
 					</label>
 					<label>
 						Password:
-						<input type="password" name={'password'} value={password} onChange={this.changeInput} />
+						<input
+							className="transparent"
+							type="password"
+							name={'password'}
+							value={password}
+							onChange={this.changeInput}
+						/>
 						{errors ? <p>{errors.Email}</p> : null}
 					</label>
 					<label className="buttons">

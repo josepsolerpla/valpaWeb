@@ -17,7 +17,7 @@ class LoginMenuSVG extends React.Component {
 				<path
 					className="fondo"
 					d="M1184,1644.63C1184,1588.26 1138.24,1542.5 1081.88,1542.5L705,1542.5L705,1951L1081.88,1951C1138.24,1951 1184,1905.24 1184,1848.88L1184,1644.63Z"
-					style={{ fill: 'rgb(209,209,209)' }}
+					style={{ fill: 'rgb(209,209,209)', filter: 'url(#dropshadow)' }}
 				/>
 				<foreignObject width="700" height="600" x="450" y="1500" xmlns="http://www.w3.org/2000/svg">
 					<div xmlns="http://www.w3.org/1999/xhtml">
