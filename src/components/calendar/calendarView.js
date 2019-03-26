@@ -12,10 +12,11 @@ class CalendarView extends Component {
 		super();
 		this.state = {
 			currentYear: new Date().getFullYear(),
-			currentMonth: new Date().getMonth() + 1,
+			currentMonth: new Date().getMonth() + 1 < 10 ? `0${new Date().getMonth() + 1}` : new Date().getMonth() + 1,
 			currentDate: new Date().getDate(),
 			events: []
 		};
+		this.state.realCurrentDate = `${this.state.currentYear}-${this.state.currentMonth}-${this.state.currentDate}`;
 		this.listUpcomingEvents = this.listUpcomingEvents.bind(this);
 	}
 	componentWillMount() {
@@ -37,10 +38,11 @@ class CalendarView extends Component {
 			})
 			.then((response) => {
 				var events = response.result.items;
-				console.log(response);
-				this.setState({
-					events: events
-				});
+				if (events) {
+					this.setState({
+						events: events
+					});
+				}
 			});
 	}
 	daysInMonth(month, year) {
@@ -48,17 +50,40 @@ class CalendarView extends Component {
 	}
 
 	render() {
-		const { events, currentYear, currentMonth, currentDate } = this.state;
+		const { events, currentYear, currentMonth, currentDate, realCurrentDate } = this.state;
 
 		let daysInMonth_ = this.daysInMonth(currentMonth, currentYear);
 		let daysToPrint = [];
+		console.log(realCurrentDate);
 		Utils.times(daysInMonth_)((i) =>
-			daysToPrint.push(
-				<div className="day" key={i}>
-					<i>{i}</i>
-				</div>
-			)
+			events.map((event) => {
+				if (event.start.date == `${currentYear}-${currentMonth}-${i}`) {
+					daysToPrint.push(
+						<div
+							className={`day ${realCurrentDate == `${currentYear}-${currentMonth}-${i}` ? 'today' : ''}`}
+							key={i}
+						>
+							<i>{i}</i>
+							<p>{event.summary}</p>
+						</div>
+					);
+				} else {
+					daysToPrint.push(
+						<div
+							className={`day ${realCurrentDate == `${currentYear}-${currentMonth}-${i}` ? 'today' : ''}`}
+							key={i}
+						>
+							<i>{i}</i>
+						</div>
+					);
+				}
+			})
 		);
+
+		events.map((event) => {
+			console.log(event.start.date);
+			console.log(event);
+		});
 
 		const eventsPrint = events.map((event) => {
 			return <h1 key={event.id}>{event.summary}</h1>;

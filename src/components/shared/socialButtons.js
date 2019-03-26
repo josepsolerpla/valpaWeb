@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import GoogleLogin from 'react-google-login';
 import googleApi from '../../apiGoogleconfig.json';
+import { Utils } from '../../utils';
 
 const mapDispatchToProps = (dispatch) => ({});
 const mapStateToProps = (state) => ({});
@@ -12,9 +13,7 @@ class SocialButton extends Component {
 		super();
 		this.onSubmit = this.onSubmit.bind(this);
 	}
-	onSubmit(form) {
-		console.log(form);
-	}
+	onSubmit(res) {}
 	render() {
 		const { button } = this.props;
 

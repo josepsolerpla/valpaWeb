@@ -5,3 +5,4 @@ export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const REGISTER = 'REGISTER';
 export const VALIDATE_TOKEN = 'VALIDATE_TOKEN';
+export const SET_VALUE = 'SET_VALUE';

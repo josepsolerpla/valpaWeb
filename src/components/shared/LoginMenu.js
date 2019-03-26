@@ -2,8 +2,9 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SocialButton from './socialButtons';
-import { SET_AUTH, LOGIN, LOGOUT } from '../../constants/actionTypes';
+import { SET_AUTH, LOGIN, LOGOUT, SET_VALUE } from '../../constants/actionTypes';
 import agent from '../../agent';
+import { Utils } from '../../utils';
 
 /**
  * Productos Component
@@ -32,26 +33,41 @@ class LoginMenu extends Component {
 				apiKey: 'AIzaSyCx5i-GvCIDYAVIHBMHvytmbPQPaMJZ1C4',
 				clientId: '583358016498-4r0ph0bk5ms93ffbdr9h5591kbej2vgq.apps.googleusercontent.com',
 				discoveryDocs: [ 'https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest' ],
-				scope: 'https://www.googleapis.com/auth/calendar.readonly'
+				scope: 'https://www.googleapis.com/auth/calendar.readonly profile'
 			})
 			.then(
 				() => {
+					let GoogleAuth = gapi.auth2.getAuthInstance();
+					console.log('Is loged: ', GoogleAuth.isSignedIn.get());
+
+					// Para dar permisos -->
+					// GoogleUser.grant({ scope: 'profile' });
+
+					// GoogleAuth.signOut();
+
 					// Listen for sign-in state changes.
-					gapi.auth2.getAuthInstance().isSignedIn.listen(this.updateSigninStatus);
+					GoogleAuth.isSignedIn.listen(this.updateSigninStatus);
 					// Handle the initial sign-in state.
-					this.updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+					this.updateSigninStatus(GoogleAuth.isSignedIn.get());
 				},
-				(error) => {
-					console.warn(error);
+				(err) => {
+					console.warn(err);
 				}
 			);
 	}
 	updateSigninStatus(isSignedIn) {
+		let GoogleAuth = gapi.auth2.getAuthInstance();
 		if (isSignedIn) {
-			console.log('Correct');
-			this.props.setAuth(isSignedIn);
+			// User _proto_ to see the data
+			let GoogleUser = GoogleAuth.currentUser.get();
+			// console.log('who ami: ', GoogleUser);
+			// console.log('DataOfSession: ', GoogleUser.getAuthResponse());
+			let googleToken = GoogleUser.getAuthResponse().id_token;
+			Utils.setCookie('jwt', googleToken);
+			this.props.isAuthed(googleToken);
 		} else {
 			console.warn('ERROR on google auth');
+			this.props.setValue(false, 'authLoading');
 		}
 	}
 	handleAuthClick() {
@@ -73,8 +89,19 @@ class LoginMenu extends Component {
 		});
 	}
 	render() {
-		const { modalLogin, showModalLogin, isAuth, errors } = this.props;
+		const { modalLogin, showModalLogin, isAuth, errors, authLoading } = this.props;
 		const { name, password } = this.state;
+
+		// If the call is beeing emited
+		if (authLoading) {
+			return (
+				<section className="LoginMenun">
+					<h1>Loading</h1>
+				</section>
+			);
+		}
+
+		// If the user is Authed on the app
 		if (isAuth) {
 			return (
 				<section className="LoginMenu">
@@ -87,6 +114,8 @@ class LoginMenu extends Component {
 				</section>
 			);
 		}
+
+		// If not
 		return (
 			<section className="LoginMenu">
 				<div onClick={showModalLogin}>Login</div>
@@ -104,7 +133,8 @@ class LoginMenu extends Component {
 							value={password}
 							onChange={this.changeInput}
 						/>
-						{errors ? <p>{errors.Email}</p> : null}
+						{errors && errors.Email ? <p>{errors.Email}</p> : null}
+						{errors && errors.idGoogle ? <p>{errors.idGoogle}</p> : null}
 					</label>
 					<label className="buttons">
 						<button>Login</button>
@@ -123,25 +153,30 @@ class LoginMenu extends Component {
 
 const mapStateToProps = (state) => ({ ...state.Auth });
 const mapDispatchToProps = (dispatch) => ({
-	setAuth: (auth) => {
-		dispatch({ type: SET_AUTH, auth });
+	isAuthed: (googleToken) => {
+		dispatch({ type: SET_AUTH, payload: agent.Auth.isAuthed(googleToken) });
 	},
 	loginRequest: (name, password) => {
 		dispatch({ type: LOGIN, payload: agent.Auth.login(name, password) });
 	},
 	logout: () => {
 		dispatch({ type: LOGOUT, payload: agent.Auth.logout() });
+	},
+	setValue: (value, target) => {
+		dispatch({ type: SET_VALUE, value, target });
 	}
 });
 
 LoginMenu.propTypes = {
 	modalLogin: PropTypes.bool,
 	showModalLogin: PropTypes.func,
-	setAuth: PropTypes.func,
+	isAuthed: PropTypes.func,
 	isAuth: PropTypes.bool,
 	loginRequest: PropTypes.func,
 	logout: PropTypes.func,
-	errors: PropTypes.object
+	setValue: PropTypes.func,
+	errors: PropTypes.object,
+	authLoading: PropTypes.bool
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginMenu);

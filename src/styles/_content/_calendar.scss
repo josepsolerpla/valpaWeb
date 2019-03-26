@@ -4,13 +4,16 @@
 	background-image: url('/imagenes/backgroundInicio.jpg');
 	background-position: 0%;
 	display: grid;
-	justify-content: center;
-	align-content: center;
-	.logoValpa svg {
-		height: 500px;
-	}
-	.comming {
-		color: white;
-		text-align: center;
+	grid-template-columns: repeat(7, 1fr);
+	grid-gap: 15px;
+	.day {
+		background: $secondaryColor;
+		transition: all 300ms ease-in-out;
+		&.today {
+			background: lighten($color: $secondaryColor, $amount: 50%);
+		}
+		&:hover {
+			background: lighten($color: $secondaryColor, $amount: 15%);
+		}
 	}
 }

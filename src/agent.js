@@ -28,9 +28,15 @@ const Auth = {
 		Utils.deleteCookie('jwt');
 		token = null;
 	},
-	isAuthed: () => {
-		if (Utils.getCookie('jwt')) return requests.post('/users/resolveToken', { token: Utils.getCookie('jwt') });
-		else return { error: 'no_jwt' };
+	isAuthed: (tokenGoogle = null) => {
+		if (tokenGoogle) {
+			return requests.post('/authed/isIn', { tokenGoogle: tokenGoogle });
+		}
+		if (Utils.getCookie('jwt')) {
+			return requests.post('/authed/isIn', { tokenGoogle: Utils.getCookie('jwt') });
+		}
+
+		return { error: 'no_jwt' };
 	}
 };
 
