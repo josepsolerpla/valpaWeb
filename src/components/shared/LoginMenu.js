@@ -67,6 +67,7 @@ class LoginMenu extends Component {
 			this.props.isAuthed(googleToken);
 		} else {
 			console.warn('ERROR on google auth');
+			this.handleSignoutClick();
 			this.props.setValue(false, 'authLoading');
 		}
 	}

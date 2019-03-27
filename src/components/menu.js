@@ -10,8 +10,8 @@ class Menu extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			modal: true,
-			modalLogin: true
+			modal: false,
+			modalLogin: false
 		};
 		this.showModal = this.showModal.bind(this);
 		this.showLogin = this.showLogin.bind(this);
