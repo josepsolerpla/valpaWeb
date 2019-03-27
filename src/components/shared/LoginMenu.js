@@ -89,7 +89,7 @@ class LoginMenu extends Component {
 		});
 	}
 	render() {
-		const { modalLogin, showModalLogin, isAuth, errors, authLoading } = this.props;
+		const { showModalLogin, isAuth, errors, authLoading } = this.props;
 		const { name, password } = this.state;
 
 		// If the call is beeing emited
@@ -106,7 +106,7 @@ class LoginMenu extends Component {
 			return (
 				<section className="LoginMenu">
 					<div onClick={showModalLogin}>Login</div>
-					<form className={modalLogin ? null : 'close'}>
+					<form>
 						<label className="buttons logout">
 							<button onClick={this.handleSignoutClick}>Logout</button>
 						</label>
@@ -119,7 +119,7 @@ class LoginMenu extends Component {
 		return (
 			<section className="LoginMenu">
 				<div onClick={showModalLogin}>Login</div>
-				<form className={modalLogin ? null : 'close'} onSubmit={this.login}>
+				<form onSubmit={this.login}>
 					<label>
 						User:
 						<input className="transparent" name={'name'} value={name} onChange={this.changeInput} />
@@ -168,7 +168,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 LoginMenu.propTypes = {
-	modalLogin: PropTypes.bool,
 	showModalLogin: PropTypes.func,
 	isAuthed: PropTypes.func,
 	isAuth: PropTypes.bool,

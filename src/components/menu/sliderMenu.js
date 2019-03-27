@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 class SliderMenu extends React.Component {
 	render() {
 		const history = this.context.router.history;
+		const { showLogin, modalLogin } = this.props;
 
 		return (
 			<HashRouter>
@@ -208,8 +209,8 @@ class SliderMenu extends React.Component {
 							</g>
 						</g>
 					</Link>
-					<Link to="/Login">
-						<g className={`LoginFader ${history.location.hash == '#/Login' ? 'active' : ''}`}>
+					<a onClick={showLogin}>
+						<g className={`LoginFader ${modalLogin ? 'active' : ''}`}>
 							<g transform="matrix(0.798489,0,0,1,6.48615,710)">
 								<rect x="57" y="451" width="1191" height="188" style={{ fill: 'rgb(46,46,46)' }} />
 							</g>
@@ -221,9 +222,7 @@ class SliderMenu extends React.Component {
 							</g>
 							<g
 								className="Fader"
-								transform={`matrix(1,0,0,1,0,653) ${history.location.hash == '#/Login'
-									? 'translate(600,0)'
-									: ' '}`}
+								transform={`matrix(1,0,0,1,0,653) ${modalLogin ? 'translate(600,0)' : ' '}`}
 							>
 								<g className="object">
 									<path
@@ -260,12 +259,17 @@ class SliderMenu extends React.Component {
 								/>
 							</g>
 						</g>
-					</Link>
+					</a>
 				</g>
 			</HashRouter>
 		);
 	}
 }
+
+SliderMenu.propTypes = {
+	showLogin: PropTypes.func,
+	modalLogin: PropTypes.bool
+};
 
 SliderMenu.contextTypes = {
 	router: PropTypes.object

@@ -132,6 +132,7 @@ header {
 				position: relative;
 				left: 300px;
 				top: 75px;
+				transition: opacity 300ms ease;
 				label {
 					input {
 						margin: 50px 0;
@@ -152,6 +153,9 @@ header {
 					&.logout {
 						top: 0;
 					}
+				}
+				&.close {
+					opacity: 0;
 				}
 			}
 		}

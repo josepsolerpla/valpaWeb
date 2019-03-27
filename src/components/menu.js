@@ -10,18 +10,25 @@ class Menu extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			modal: true
+			modal: true,
+			modalLogin: true
 		};
 		this.showModal = this.showModal.bind(this);
+		this.showLogin = this.showLogin.bind(this);
 	}
 	showModal() {
 		this.setState({
 			modal: !this.state.modal
 		});
 	}
+	showLogin() {
+		this.setState({
+			modalLogin: !this.state.modalLogin
+		});
+	}
 	render() {
 		// If the user is Authed
-		const { modal } = this.state;
+		const { modal, modalLogin } = this.state;
 		return (
 			<header className={`menu__container ${modal ? '' : 'close'}`}>
 				<section className={`buttonNav`} onClick={() => this.showModal()}>
@@ -68,8 +75,8 @@ class Menu extends React.Component {
 					</filter>
 					<g className={`menu`}>
 						<BoxMenu />
-						<SliderMenu />
-						<LoginMenuSVG />
+						<SliderMenu showLogin={this.showLogin} modalLogin={modalLogin} />
+						<LoginMenuSVG modalLogin={modalLogin} />
 					</g>
 				</svg>
 			</header>

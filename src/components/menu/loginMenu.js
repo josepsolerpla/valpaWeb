@@ -6,6 +6,7 @@ import LoginMenu from '../shared/LoginMenu';
 
 class LoginMenuSVG extends React.Component {
 	render() {
+		const { modalLogin } = this.props;
 		return (
 			<g>
 				<g transform="matrix(0.680101,0,0,2.69681,394.234,272.739)">
@@ -20,13 +21,15 @@ class LoginMenuSVG extends React.Component {
 					style={{ fill: 'rgb(209,209,209)', filter: 'url(#dropshadow)' }}
 				/>
 				<foreignObject width="700" height="600" x="450" y="1500" xmlns="http://www.w3.org/2000/svg">
-					<div xmlns="http://www.w3.org/1999/xhtml">
-						<LoginMenu modalLogin={true} />
-					</div>
+					<div xmlns="http://www.w3.org/1999/xhtml">{modalLogin ? <LoginMenu /> : null}</div>
 				</foreignObject>
 			</g>
 		);
 	}
 }
+
+LoginMenuSVG.propTypes = {
+	modalLogin: PropTypes.bool
+};
 
 export default connect()(LoginMenuSVG);

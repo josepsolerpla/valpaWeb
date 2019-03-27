@@ -16,4 +16,9 @@
 			background: lighten($color: $secondaryColor, $amount: 15%);
 		}
 	}
+	.selectCalendar {
+		position: absolute;
+		top: 0;
+		left: 45vw;
+	}
 }
