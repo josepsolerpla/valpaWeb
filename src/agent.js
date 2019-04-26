@@ -4,7 +4,7 @@ import { Utils } from './utils';
 
 const superagent = superagentPromise(_superagent, global.Promise);
 
-const API_ROOT = 'http://127.0.0.1:3000/api';
+const API_ROOT = 'http://yuse.ga:3000/api';
 
 const responseBody = (res) => res.body;
 
